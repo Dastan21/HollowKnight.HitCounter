@@ -5,6 +5,7 @@ HitCounter is a Hollow Knight mod which adds an in-game interface to count hits.
 You have to switch manually splits with keybinds (which you can change in the in-game mod menu).
 
 <img title="Screenshot of Pantheons Hit Counter" src="https://i.imgur.com/TiUapTe.png" width="800"/>
+<img title="Screenshot of Compact/Default UI Mode" src="https://i.imgur.com/g6BuISM.png" width="400"/>
 
 ## Adding custom counters
 1. Open the `Counters` folder from the mod menu or manually at path `...\hollow_knight_Data\Managed\Mods\Hit Counter\Counters`
