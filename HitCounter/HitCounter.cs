@@ -52,7 +52,7 @@ namespace HitCounter
 
         private int OnHitTaken(int damage)
         {
-            
+            if (_currentCounter == null) return damage;
             _currentCounter.GetCurrentSplit().AddHit();
             CounterUI.UpdateUI(_currentCounter);
 
@@ -172,6 +172,7 @@ namespace HitCounter
 
         private void OnHeroUpdate()
         {
+            if (_currentCounter == null) return;
             if (GlobalData.Keybinds.nextSplit.WasPressed || GlobalData.Buttonbinds.nextSplit.WasPressed)
             {
                 if (_currentCounter.currentSplit >= _currentCounter.splits.Count - 1 && _currentCounter.IsPbRun()) UpdateData();
