@@ -121,18 +121,14 @@ namespace HitCounter
                 ),
                 new ButtonBind("Toggle Counter", HitCounter.Instance.GlobalData.Buttonbinds.toggleCounter, "ButtonBind-ToggleCounter"){ isVisible = false },
                 new ButtonBind("Next Split", HitCounter.Instance.GlobalData.Buttonbinds.nextSplit, "ButtonBind-NextSplit"){ isVisible = false },
-                new ButtonBind("Previous Split", HitCounter.Instance.GlobalData.Buttonbinds.previousSplit, "ButtonBind-PreviousSplit"){ isVisible = false },
-                // Blueprints.KeyAndButtonBind("Toggle Counter", _keybinds.toggleCounter, _buttonbinds.toggleCounter),
-                // Blueprints.KeyAndButtonBind("Next Split", _keybinds.nextSplit, _buttonbinds.nextSplit),
-                // Blueprints.KeyAndButtonBind("Previous Split", _keybinds.previousSplit, _buttonbinds.previousSplit)
+                new ButtonBind("Previous Split", HitCounter.Instance.GlobalData.Buttonbinds.previousSplit, "ButtonBind-PreviousSplit"){ isVisible = false }
             });
         }
 
         public static MenuScreen GetMenu(MenuScreen lastMenu, ModToggleDelegates? toggle)
         {
             if (toggle == null) return null;
-            if (_menuRef == null)
-                _menuRef = PrepareMenu((ModToggleDelegates) toggle);
+            _menuRef = PrepareMenu((ModToggleDelegates) toggle);
             
             return _menuRef.GetMenuScreen(lastMenu);
         }

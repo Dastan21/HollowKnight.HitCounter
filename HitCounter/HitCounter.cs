@@ -25,7 +25,7 @@ namespace HitCounter
         public const int CompactSplitsCountMax = 30;
 
         public HitCounter() : base("Hit Counter") {}
-        public override string GetVersion() => "1.0.0";
+        public override string GetVersion() => "1.0.1";
         public void OnLoadGlobal(GlobalData data) => GlobalData = data;
         public GlobalData OnSaveGlobal() => GlobalData;
         private static bool IsMenuTitleScene() => Satchel.SceneUtils.getCurrentScene().name == "Menu_Title";
@@ -35,7 +35,7 @@ namespace HitCounter
             Instance = this;
             
             ModHooks.SavegameLoadHook += OnSavegameLoad;
-            ModHooks.TakeHealthHook += OnHitTaken;
+            ModHooks.AfterTakeDamageHook += OnHitTaken;
             ModHooks.HeroUpdateHook += OnHeroUpdate;
 
             if (_loaded)
@@ -50,7 +50,7 @@ namespace HitCounter
             LoadPBs();
         }
 
-        private int OnHitTaken(int damage)
+        private int OnHitTaken(int hazardType, int damage)
         {
             if (_currentCounter == null) return damage;
             _currentCounter.GetCurrentSplit().AddHit();
@@ -200,7 +200,7 @@ namespace HitCounter
         public void Unload()
         {
             ModHooks.SavegameLoadHook -= OnSavegameLoad;
-            ModHooks.TakeHealthHook -= OnHitTaken;
+            ModHooks.AfterTakeDamageHook  -= OnHitTaken;
             ModHooks.HeroUpdateHook -= OnHeroUpdate;
 
             ResourcesLoader.Instance.Destroy();
