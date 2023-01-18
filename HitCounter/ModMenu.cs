@@ -35,6 +35,9 @@ namespace HitCounter
                         HitCounter.Instance.ToggleCurrentCounter();
                     },
                     () => HitCounter.Instance.GlobalData.totalSplits,
+                    HitCounter.SplitsMin,
+                    HitCounter.Instance.GlobalData.compactMode ? HitCounter.CompactSplitsCountMax : HitCounter.DefaultSplitsCountMax,
+                    true,
                     "CustomSlider-MaximumSplits"
                 )
                 {
