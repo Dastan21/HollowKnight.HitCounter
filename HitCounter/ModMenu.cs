@@ -1,12 +1,12 @@
-﻿using System;
-using System.Linq;
-using Modding;
+﻿using Modding;
 using Satchel;
 using Satchel.BetterMenus;
+using System;
+using System.Linq;
 
 namespace HitCounter
 {
-    public static class NewModMenu
+    public static class ModMenu
     {
         private static Menu _menuRef;
         private static bool _toggleKeybinds;
@@ -14,11 +14,11 @@ namespace HitCounter
 
         private static Menu PrepareMenu(ModToggleDelegates toggle)
         {
-            return new Menu(HitCounter.Instance.GetName(),new Element[]
+            return new Menu(HitCounter.Instance.GetName(), new Element[]
             {
                 toggle.CreateToggle("Mod toggle", "Allows disabling the mod"),
                 new HorizontalOption(
-                    "Selected counter", 
+                    "Selected counter",
                     "Select the counter you want to use",
                     HitCounter.Instance.Counters.Select(s => s.title).ToArray(),
                     counter => {
@@ -87,12 +87,16 @@ namespace HitCounter
                             _menuRef?.Find("Keybind-ToggleCounter")?.Show();
                             _menuRef?.Find("Keybind-NextSplit")?.Show();
                             _menuRef?.Find("Keybind-PreviousSplit")?.Show();
+                            _menuRef?.Find("Keybind-AddHit")?.Show();
+                            _menuRef?.Find("Keybind-RemoveHit")?.Show();
                         }
                         else
                         {
                             _menuRef?.Find("Keybind-ToggleCounter")?.Hide();
                             _menuRef?.Find("Keybind-NextSplit")?.Hide();
                             _menuRef?.Find("Keybind-PreviousSplit")?.Hide();
+                            _menuRef?.Find("Keybind-AddHit")?.Hide();
+                            _menuRef?.Find("Keybind-RemoveHit")?.Hide();
                         }
                     },
                     Id: "MenuButton-Keybinds"
@@ -100,6 +104,8 @@ namespace HitCounter
                 new KeyBind("Toggle Counter", HitCounter.Instance.GlobalData.Keybinds.toggleCounter, "Keybind-ToggleCounter"){ isVisible = false },
                 new KeyBind("Next Split", HitCounter.Instance.GlobalData.Keybinds.nextSplit, "Keybind-NextSplit"){ isVisible = false },
                 new KeyBind("Previous Split", HitCounter.Instance.GlobalData.Keybinds.previousSplit, "Keybind-PreviousSplit"){ isVisible = false },
+                new KeyBind("Add Hit", HitCounter.Instance.GlobalData.Keybinds.addHit, "Keybind-AddHit"){ isVisible = false },
+                new KeyBind("Remove Hit", HitCounter.Instance.GlobalData.Keybinds.removeHit, "Keybind-RemoveHit"){ isVisible = false },
                 new MenuButton(
                     "Controller bindings",
                     "Click to show controller bindings",
@@ -112,27 +118,33 @@ namespace HitCounter
                             _menuRef?.Find("ButtonBind-ToggleCounter")?.Show();
                             _menuRef?.Find("ButtonBind-NextSplit")?.Show();
                             _menuRef?.Find("ButtonBind-PreviousSplit")?.Show();
+                            _menuRef?.Find("ButtonBind-AddHit")?.Show();
+                            _menuRef?.Find("ButtonBind-RemoveHit")?.Show();
                         }
                         else
                         {
                             _menuRef?.Find("ButtonBind-ToggleCounter")?.Hide();
                             _menuRef?.Find("ButtonBind-NextSplit")?.Hide();
                             _menuRef?.Find("ButtonBind-PreviousSplit")?.Hide();
+                            _menuRef?.Find("ButtonBind-AddHit")?.Hide();
+                            _menuRef?.Find("ButtonBind-RemoveHit")?.Hide();
                         }
                     },
                     Id: "MenuButton-Buttonbinds"
                 ),
                 new ButtonBind("Toggle Counter", HitCounter.Instance.GlobalData.Buttonbinds.toggleCounter, "ButtonBind-ToggleCounter"){ isVisible = false },
                 new ButtonBind("Next Split", HitCounter.Instance.GlobalData.Buttonbinds.nextSplit, "ButtonBind-NextSplit"){ isVisible = false },
-                new ButtonBind("Previous Split", HitCounter.Instance.GlobalData.Buttonbinds.previousSplit, "ButtonBind-PreviousSplit"){ isVisible = false }
+                new ButtonBind("Previous Split", HitCounter.Instance.GlobalData.Buttonbinds.previousSplit, "ButtonBind-PreviousSplit"){ isVisible = false },
+                new ButtonBind("Add Hit", HitCounter.Instance.GlobalData.Buttonbinds.addHit, "ButtonBind-AddHit"){ isVisible = false },
+                new ButtonBind("Remove Hit", HitCounter.Instance.GlobalData.Buttonbinds.removeHit, "ButtonBind-RemoveHit"){ isVisible = false },
             });
         }
 
         public static MenuScreen GetMenu(MenuScreen lastMenu, ModToggleDelegates? toggle)
         {
             if (toggle == null) return null;
-            _menuRef = PrepareMenu((ModToggleDelegates) toggle);
-            
+
+            _menuRef = PrepareMenu((ModToggleDelegates)toggle);
             return _menuRef.GetMenuScreen(lastMenu);
         }
     }

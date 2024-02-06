@@ -32,9 +32,8 @@ namespace HitCounter
         {
             if (currentSplit > 0) currentSplit--;
         }
-        public bool IsPbRun() => TotalHitsPb < 0 || TotalHits < TotalHitsPb;
     }
-    
+
     [Serializable]
     public class Split
     {
@@ -48,5 +47,6 @@ namespace HitCounter
         }
 
         public void AddHit() => hits++;
+        public void RemoveHit() => hits = Math.Max(0, hits - 1);
     }
 }
